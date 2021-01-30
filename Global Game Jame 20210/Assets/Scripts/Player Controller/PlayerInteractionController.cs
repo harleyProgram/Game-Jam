@@ -9,13 +9,40 @@ public class PlayerInteractionController : MonoBehaviour
     private event Action _playerInterActionEvent;
 
     private InteractableObject _interactableObject = null;
+    private Color originalColour;
 
+    private Transform lastHit;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
         {
-            Debug.Log("Left mouse");
-            _interactableObject?.Interact();
+            if (lastHit != null && lastHit != hit.transform)
+            {
+                lastHit.GetComponent<Renderer>().material.color = originalColour;
+                _interactableObject = null;
+                lastHit = null;
+            }
+            
+            if (hit.transform.GetComponent<InteractableObject>() == null) return;
+            
+            Renderer renderer = hit.transform.GetComponent<Renderer>();
+            if (renderer.material.color != Color.yellow)
+            {
+                originalColour = renderer.material.color;
+                renderer.material.color = Color.yellow;
+            }
+
+            lastHit = hit.transform;
+
+            if (_interactableObject == null)
+                _interactableObject = hit.transform.GetComponent<InteractableObject>();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _interactableObject?.Interact();
+            }
         }
     }
 
@@ -24,7 +51,7 @@ public class PlayerInteractionController : MonoBehaviour
         if (other.GetComponent<InteractableObject>() != null)
         {
             _interactableObject = other.GetComponent<InteractableObject>();
-            Debug.Log("Added To Interaction");
+            
         }
 
     }
@@ -34,7 +61,8 @@ public class PlayerInteractionController : MonoBehaviour
         if (other.GetComponent<InteractableObject>() != null)
         {
             _interactableObject = other.GetComponent<InteractableObject>();
-            Debug.Log("Removed To Interaction");
+            Renderer renderer = other.GetComponent<Renderer>();
+            renderer.material.color = originalColour;
 
         }
     }
