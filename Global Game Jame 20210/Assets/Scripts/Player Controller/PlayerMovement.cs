@@ -37,5 +37,10 @@ public class PlayerMovement : MonoBehaviour
         _velocity.y += gravity * Time.deltaTime;
         controller.Move(_velocity * Time.deltaTime);
 
+        if (move.x != 0 || move.z != 0)
+        {
+            Debug.Log("Play foot steps");
+        }
+
     }
 }
