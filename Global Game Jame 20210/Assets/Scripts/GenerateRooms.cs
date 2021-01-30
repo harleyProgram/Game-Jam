@@ -7,7 +7,11 @@ public class GenerateRooms : MonoBehaviour
 {
     public List<RoomHelper> roomsList = new List<RoomHelper>();
     
+    public List<GameObject> largeRooms = new List<GameObject>();
     public List<GameObject> mediumRooms = new List<GameObject>();
+    public List<GameObject> mediumLongRooms = new List<GameObject>();
+    public List<GameObject> tinyRooms = new List<GameObject>();
+    public List<GameObject> smallroom2x1 = new List<GameObject>();
 
     private void Start()
     {
@@ -25,6 +29,29 @@ public class GenerateRooms : MonoBehaviour
                     Transform room = roomsList[i].availablePoints[j].transform;
                     Instantiate(mediumRooms[0], room.position, room.rotation);
                 }
+                
+                if (roomsList[i].availablePoints[j].roomTypeNeeded == 0)
+                {
+                    Transform room = roomsList[i].availablePoints[j].transform;
+                    Instantiate(tinyRooms[0], room.position, room.rotation);
+                }
+                
+                if (roomsList[i].availablePoints[j].roomTypeNeeded == 2)
+                {
+                    Transform room = roomsList[i].availablePoints[j].transform;
+                    Instantiate(largeRooms[0], room.position, room.rotation);
+                }
+                if (roomsList[i].availablePoints[j].roomTypeNeeded == 3)
+                {
+                    Transform room = roomsList[i].availablePoints[j].transform;
+                    Instantiate(mediumLongRooms[0], room.position, room.rotation);
+                }
+                if (roomsList[i].availablePoints[j].roomTypeNeeded == 4)
+                {
+                    Transform room = roomsList[i].availablePoints[j].transform;
+                    Instantiate(smallroom2x1[0], room.position, room.rotation);
+                }
+
             }
         }
     }
