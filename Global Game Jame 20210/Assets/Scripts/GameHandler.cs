@@ -28,20 +28,15 @@ public class GameHandler : MonoBehaviour
         int rng = UnityEngine.Random.Range(0, lostItemsList.Count);
 
         Instantiate(lostItemsList[rng], LostSpot().position, Quaternion.identity);
-        
-        Debug.Log("look for: " + lostItemsList[rng].name);
 
     }
 
     private Transform LostSpot()
     {
         int rng = UnityEngine.Random.Range(0, _generateRooms.finalRooms.Count);
-
-        HiddenSpots hiddenSpots = _generateRooms.finalRooms[rng].GetComponent<HiddenSpots>();
-
-        int rngSpot = UnityEngine.Random.Range(0, hiddenSpots.hiddenLocations.Count);
         
-        return hiddenSpots.hiddenLocations[rngSpot].transform;
+        
+        return _generateRooms.finalRooms[rng].transform;
     }
     
     
