@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class GenerateRooms : MonoBehaviour
 {
@@ -28,37 +29,46 @@ public class GenerateRooms : MonoBehaviour
             {
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 1)
                 {
+                    int rng = UnityEngine.Random.Range(0, mediumRooms.Count);
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    var newRoom = Instantiate(mediumRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(mediumRooms[rng], room.position, room.rotation);
                     finalRooms.Add(newRoom);
                 }
                 
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 0)
                 {
+                    int rng = UnityEngine.Random.Range(0, tinyRooms.Count);
+
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    var newRoom = Instantiate(tinyRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(tinyRooms[rng], room.position, room.rotation);
                     finalRooms.Add(newRoom);
 
                 }
                 
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 2)
                 {
+                    int rng = UnityEngine.Random.Range(0, largeRooms.Count);
+
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    var newRoom = Instantiate(largeRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(largeRooms[rng], room.position, room.rotation);
                     finalRooms.Add(newRoom);
 
                 }
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 3)
                 {
+                    int rng = UnityEngine.Random.Range(0, mediumLongRooms.Count);
+
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    var newRoom = Instantiate(mediumLongRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(mediumLongRooms[rng], room.position, room.rotation);
                     finalRooms.Add(newRoom);
 
                 }
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 4)
                 {
+                    int rng = UnityEngine.Random.Range(0, smallroom2x1.Count);
+
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    var newRoom = Instantiate(smallroom2x1[0], room.position, room.rotation);
+                    var newRoom = Instantiate(smallroom2x1[rng], room.position, room.rotation);
                     finalRooms.Add(newRoom);
 
                 }
