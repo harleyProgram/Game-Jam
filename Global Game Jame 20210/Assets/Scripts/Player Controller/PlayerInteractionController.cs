@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player_Controller.Interaction_types;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -12,11 +13,20 @@ public class PlayerInteractionController : MonoBehaviour
     private Color originalColour;
 
     private Transform lastHit;
+
+    public GameObject holdingItem;
+    
     private void Update()
     {
+        
+        if (Input.GetMouseButtonDown(1) && holdingItem != null)
+        {
+            holdingItem.GetComponent<PickUp_Interaction>().DropItem();
+        }
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
+        Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.forward), Color.red,1f);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 8f))
         {
             if (lastHit != null && lastHit != hit.transform)
             {
@@ -31,7 +41,11 @@ public class PlayerInteractionController : MonoBehaviour
             if (renderer.material.color != Color.yellow)
             {
                 originalColour = renderer.material.color;
-                renderer.material.color = Color.yellow;
+                if(hit.transform.GetComponent<LostItem_Interaction>() != null)
+                    renderer.material.color = Color.green;
+                else
+                    renderer.material.color = Color.yellow;
+                
             }
 
             lastHit = hit.transform;
@@ -44,6 +58,10 @@ public class PlayerInteractionController : MonoBehaviour
                 _interactableObject?.Interact();
             }
         }
+
+        
+        
+        
     }
 
     private void OnTriggerEnter(Collider other)
