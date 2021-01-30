@@ -12,8 +12,10 @@ public class GenerateRooms : MonoBehaviour
     public List<GameObject> mediumLongRooms = new List<GameObject>();
     public List<GameObject> tinyRooms = new List<GameObject>();
     public List<GameObject> smallroom2x1 = new List<GameObject>();
+    
+    public List<GameObject> finalRooms = new List<GameObject>();
 
-    private void Start()
+    private void Awake()
     {
         SpawnRooms();
     }
@@ -27,29 +29,38 @@ public class GenerateRooms : MonoBehaviour
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 1)
                 {
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    Instantiate(mediumRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(mediumRooms[0], room.position, room.rotation);
+                    finalRooms.Add(newRoom);
                 }
                 
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 0)
                 {
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    Instantiate(tinyRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(tinyRooms[0], room.position, room.rotation);
+                    finalRooms.Add(newRoom);
+
                 }
                 
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 2)
                 {
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    Instantiate(largeRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(largeRooms[0], room.position, room.rotation);
+                    finalRooms.Add(newRoom);
+
                 }
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 3)
                 {
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    Instantiate(mediumLongRooms[0], room.position, room.rotation);
+                    var newRoom = Instantiate(mediumLongRooms[0], room.position, room.rotation);
+                    finalRooms.Add(newRoom);
+
                 }
                 if (roomsList[i].availablePoints[j].roomTypeNeeded == 4)
                 {
                     Transform room = roomsList[i].availablePoints[j].transform;
-                    Instantiate(smallroom2x1[0], room.position, room.rotation);
+                    var newRoom = Instantiate(smallroom2x1[0], room.position, room.rotation);
+                    finalRooms.Add(newRoom);
+
                 }
 
             }
