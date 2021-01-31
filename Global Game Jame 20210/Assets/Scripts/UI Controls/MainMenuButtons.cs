@@ -26,6 +26,8 @@ public class MainMenuButtons : MonoBehaviour
         controlsButtonEnter.onClick.AddListener(EnableControls);
         controlsButtonExit.onClick.AddListener(DisableControls);
         
+        quitButton.onClick.AddListener(CloseGame);
+        
         firstNextButton.onClick.AddListener(delegate { ChangeToNextSection(secondPanel, firstPanel ); });
         secondNextButton.onClick.AddListener(delegate { ChangeToNextSection(thirdPanel, secondPanel ); });
         firstBackButton.onClick.AddListener(delegate { ChangeToNextSection(firstPanel, secondPanel ); });
@@ -65,8 +67,13 @@ public class MainMenuButtons : MonoBehaviour
     private void OpenCanvas(Canvas canvas)
     {
         canvas.enabled = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0 ;
 
+    }
+
+    private void CloseGame()
+    {
+        Application.Quit();
     }
 
 

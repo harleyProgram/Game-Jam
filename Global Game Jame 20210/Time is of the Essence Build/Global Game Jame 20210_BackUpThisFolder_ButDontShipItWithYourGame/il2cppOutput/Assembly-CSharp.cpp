@@ -332,6 +332,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* List_1_get_Item_mA33D8A6F21573AD262EE055BA6
 IL2CPP_EXTERN_C const RuntimeMethod* List_1_get_Item_mB59D528B0017953D5CB28B8B9BE96CD8EB324FB7_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* List_1_get_Item_mC26BE15AFDA636E20583331F333BDD176E969000_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenuButtons_ChangeScene_mF77F99646AE2A173F7B635BC53C2B7675FA3FD02_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* MainMenuButtons_CloseGame_m3E566DD9BE944AB369508E0DAF6F94AF0A9D6C02_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenuButtons_DisableControls_mF8BB728C858CA17BDAACD263DC6C631B35349447_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenuButtons_EnableControls_m993F596B279C26C3A44F5C63D305B67B20C8C105_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenuButtons_U3CAwakeU3Eb__15_0_m5D1184C321579E50FBEC2801D2DC33BF43DC1C2D_RuntimeMethod_var;
@@ -9544,6 +9545,8 @@ inline void List_1__ctor_m12ABE366DAE5DA1A167EE7F75868147D825B232F (List_1_tE289
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UnityEvent_Invoke_mB2FA1C76256FE34D5E7F84ABE528AC61CE8A0325 (UnityEvent_t5C6DDC2FCDF7F5C1808F1DDFBAD27A383F5FE65F * __this, const RuntimeMethod* method);
 // System.Void UnityEngine.GameObject::SetActive(System.Boolean)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GameObject_SetActive_m25A39F6D9FB68C51F13313F9804E85ACC937BC04 (GameObject_tBD1244AD56B4E59AAD76E5E7C9282EC5CE434F0F * __this, bool ___value0, const RuntimeMethod* method);
+// System.Void UnityEngine.Application::Quit()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Application_Quit_mA005EB22CB989AC3794334754F15E1C0D2FF1C95 (const RuntimeMethod* method);
 // System.Void MainMenuButtons::ChangeToNextSection(UnityEngine.GameObject,UnityEngine.GameObject)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenuButtons_ChangeToNextSection_m03D70A8B9B7BEC3B58CA56F4FA4357AB4D0508B8 (MainMenuButtons_tF080D4B2B13F4DAE4457F8C13AF3B4165C5E3F32 * __this, GameObject_tBD1244AD56B4E59AAD76E5E7C9282EC5CE434F0F * ___next0, GameObject_tBD1244AD56B4E59AAD76E5E7C9282EC5CE434F0F * ___close1, const RuntimeMethod* method);
 // System.Void MainMenuButtons::OpenCanvas(UnityEngine.Canvas)
@@ -9685,8 +9688,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_tDCF05E21F632FE2BA260C06E0D10CA81513E
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_tDCF05E21F632FE2BA260C06E0D10CA81513E6720  Vector3_get_up_m6309EBC4E42D6D0B3D28056BD23D0331275306F7 (const RuntimeMethod* method);
 // UnityEngine.Vector3 UnityEngine.Vector3::get_zero()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_tDCF05E21F632FE2BA260C06E0D10CA81513E6720  Vector3_get_zero_m3CDDCAE94581DF3BB16C4B40A100E28E9C6649C2 (const RuntimeMethod* method);
-// System.Void UnityEngine.Application::Quit()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Application_Quit_mA005EB22CB989AC3794334754F15E1C0D2FF1C95 (const RuntimeMethod* method);
 // System.Boolean UnityEngine.Input::GetMouseButtonUp(System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Input_GetMouseButtonUp_m4899272EB31D43EC4A3A1A115843CD3D9AA2C4EC (int32_t ___button0, const RuntimeMethod* method);
 // System.Boolean UnityEngine.Input::GetMouseButton(System.Int32)
@@ -11621,54 +11622,62 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenuButtons_Awake_m3C81D25E5B1D8E73F
 		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_8, __this, (intptr_t)((intptr_t)MainMenuButtons_DisableControls_mF8BB728C858CA17BDAACD263DC6C631B35349447_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_7);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_7, L_8, /*hidden argument*/NULL);
-		// firstNextButton.onClick.AddListener(delegate { ChangeToNextSection(secondPanel, firstPanel ); });
-		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_9 = __this->get_firstNextButton_12();
+		// quitButton.onClick.AddListener(CloseGame);
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_9 = __this->get_quitButton_7();
 		NullCheck(L_9);
 		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_10 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_9, /*hidden argument*/NULL);
 		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_11 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
-		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_11, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_0_m5D1184C321579E50FBEC2801D2DC33BF43DC1C2D_RuntimeMethod_var), /*hidden argument*/NULL);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_11, __this, (intptr_t)((intptr_t)MainMenuButtons_CloseGame_m3E566DD9BE944AB369508E0DAF6F94AF0A9D6C02_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_10);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_10, L_11, /*hidden argument*/NULL);
-		// secondNextButton.onClick.AddListener(delegate { ChangeToNextSection(thirdPanel, secondPanel ); });
-		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_12 = __this->get_secondNextButton_13();
+		// firstNextButton.onClick.AddListener(delegate { ChangeToNextSection(secondPanel, firstPanel ); });
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_12 = __this->get_firstNextButton_12();
 		NullCheck(L_12);
 		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_13 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_12, /*hidden argument*/NULL);
 		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_14 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
-		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_14, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_1_mE95C202CB715AA85D765441D0B569063976865EE_RuntimeMethod_var), /*hidden argument*/NULL);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_14, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_0_m5D1184C321579E50FBEC2801D2DC33BF43DC1C2D_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_13);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_13, L_14, /*hidden argument*/NULL);
-		// firstBackButton.onClick.AddListener(delegate { ChangeToNextSection(firstPanel, secondPanel ); });
-		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_15 = __this->get_firstBackButton_14();
+		// secondNextButton.onClick.AddListener(delegate { ChangeToNextSection(thirdPanel, secondPanel ); });
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_15 = __this->get_secondNextButton_13();
 		NullCheck(L_15);
 		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_16 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_15, /*hidden argument*/NULL);
 		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_17 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
-		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_17, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_2_mE5B74FB8D8AB5E88531DD3547C3191BC037BB187_RuntimeMethod_var), /*hidden argument*/NULL);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_17, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_1_mE95C202CB715AA85D765441D0B569063976865EE_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_16);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_16, L_17, /*hidden argument*/NULL);
-		// secondBackButton.onClick.AddListener(delegate { ChangeToNextSection(secondPanel, thirdPanel ); });
-		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_18 = __this->get_secondBackButton_15();
+		// firstBackButton.onClick.AddListener(delegate { ChangeToNextSection(firstPanel, secondPanel ); });
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_18 = __this->get_firstBackButton_14();
 		NullCheck(L_18);
 		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_19 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_18, /*hidden argument*/NULL);
 		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_20 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
-		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_20, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_3_mD877ADA8DE2A787806557A8DBA4004A025108E40_RuntimeMethod_var), /*hidden argument*/NULL);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_20, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_2_mE5B74FB8D8AB5E88531DD3547C3191BC037BB187_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_19);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_19, L_20, /*hidden argument*/NULL);
-		// creditButton.onClick.AddListener(delegate { OpenCanvas(creditCanvas); });
-		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_21 = __this->get_creditButton_8();
+		// secondBackButton.onClick.AddListener(delegate { ChangeToNextSection(secondPanel, thirdPanel ); });
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_21 = __this->get_secondBackButton_15();
 		NullCheck(L_21);
 		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_22 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_21, /*hidden argument*/NULL);
 		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_23 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
-		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_23, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_4_m4D4A9FFB9F202CC40DC5D1B5B56C770AD4228709_RuntimeMethod_var), /*hidden argument*/NULL);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_23, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_3_mD877ADA8DE2A787806557A8DBA4004A025108E40_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_22);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_22, L_23, /*hidden argument*/NULL);
-		// closeCreditButton.onClick.AddListener(delegate { CloseCanvas(creditCanvas); });
-		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_24 = __this->get_closeCreditButton_9();
+		// creditButton.onClick.AddListener(delegate { OpenCanvas(creditCanvas); });
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_24 = __this->get_creditButton_8();
 		NullCheck(L_24);
 		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_25 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_24, /*hidden argument*/NULL);
 		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_26 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
-		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_26, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_5_mE6E85F584D80BD977DD546E05AC04520D550078E_RuntimeMethod_var), /*hidden argument*/NULL);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_26, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_4_m4D4A9FFB9F202CC40DC5D1B5B56C770AD4228709_RuntimeMethod_var), /*hidden argument*/NULL);
 		NullCheck(L_25);
 		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_25, L_26, /*hidden argument*/NULL);
+		// closeCreditButton.onClick.AddListener(delegate { CloseCanvas(creditCanvas); });
+		Button_t1203820000D5513FDCCE3D4BFF9C1C9CC755CC2B * L_27 = __this->get_closeCreditButton_9();
+		NullCheck(L_27);
+		ButtonClickedEvent_t975D9C903BC4880557ADD7D3ACFB01CB2B3D6DDB * L_28 = Button_get_onClick_m77E8CA6917881760CC7900930F4C789F3E2F8817_inline(L_27, /*hidden argument*/NULL);
+		UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 * L_29 = (UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4 *)il2cpp_codegen_object_new(UnityAction_tD19B26F1B2C048E38FD5801A33573BE01064CAF4_il2cpp_TypeInfo_var);
+		UnityAction__ctor_mEFC4B92529CE83DF72501F92E07EC5598C54BDAC(L_29, __this, (intptr_t)((intptr_t)MainMenuButtons_U3CAwakeU3Eb__15_5_mE6E85F584D80BD977DD546E05AC04520D550078E_RuntimeMethod_var), /*hidden argument*/NULL);
+		NullCheck(L_28);
+		UnityEvent_AddListener_m31973FDDC5BB0B2828AB6EF519EC4FD6563499C9(L_28, L_29, /*hidden argument*/NULL);
 		// }
 		return;
 	}
@@ -11757,8 +11766,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenuButtons_OpenCanvas_m8735FF6C5FF8
 		Canvas_tBC28BF1DD8D8499A89B5781505833D3728CF8591 * L_0 = ___canvas0;
 		NullCheck(L_0);
 		Behaviour_set_enabled_m9755D3B17D7022D23D1E4C618BD9A6B66A5ADC6B(L_0, (bool)1, /*hidden argument*/NULL);
-		// Time.timeScale = 0;
+		// Time.timeScale = 0 ;
 		Time_set_timeScale_mAB89C3BB5DEE81934159C23F103397A77AC3F4AF((0.0f), /*hidden argument*/NULL);
+		// }
+		return;
+	}
+}
+// System.Void MainMenuButtons::CloseGame()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenuButtons_CloseGame_m3E566DD9BE944AB369508E0DAF6F94AF0A9D6C02 (MainMenuButtons_tF080D4B2B13F4DAE4457F8C13AF3B4165C5E3F32 * __this, const RuntimeMethod* method)
+{
+	{
+		// Application.Quit();
+		Application_Quit_mA005EB22CB989AC3794334754F15E1C0D2FF1C95(/*hidden argument*/NULL);
 		// }
 		return;
 	}
