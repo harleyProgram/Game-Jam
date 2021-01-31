@@ -29,10 +29,20 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private Button closeMissionButton, quitButton;
     [SerializeField] private TMP_Text missionText;
 
+    [Space] public Canvas winCanvas;
+    public TMP_Text winText;
+
+    public Button winLeaveButton, winReplayButton;
+
+    private bool endGame;
+
     private void Awake()
     {
         _buttonControls = FindObjectOfType<ButtonControls>();
         _generateRooms = FindObjectOfType<GenerateRooms>();
+        
+        winLeaveButton.onClick.AddListener(delegate { _buttonControls.ChangeScene("Main Menu"); });
+        winReplayButton.onClick.AddListener(delegate { _buttonControls.ChangeScene("Create Rooms"); });
         
     }
 
@@ -45,7 +55,7 @@ public class GameHandler : MonoBehaviour
     private void Update()
     {
         
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && !endGame)
             _buttonControls.OpenCanvas(missionControlsCanvas);
         
         currentTimeLeft += Time.deltaTime;
@@ -79,6 +89,7 @@ public class GameHandler : MonoBehaviour
 
     public void GameOver()
     {
+        endGame = true;
         Time.timeScale = 0.0f;
         Cursor.lockState = CursorLockMode.None;
         gameOverCanvas.enabled = true;
@@ -100,9 +111,19 @@ public class GameHandler : MonoBehaviour
         missionText.text = "SH*T... Where did I put my " + lostItem.name + " I swear it was..... \n"  +
                            " Find the missing item before time runs out.";
         
-        
     }
-    
+
+
+    public void WinSetCondition()
+    {
+        endGame = true;
+        winCanvas.enabled = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+        winText.text = "Well done you managed to find " + lostItem.name + " with plenty of time to spare " +
+                       (maxTime - currentTimeLeft).ToString("F0");
+    }
     
     
     

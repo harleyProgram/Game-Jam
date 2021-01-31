@@ -22,12 +22,12 @@ public class TimeHandler : MonoBehaviour
 
     private void Start()
     {
-        day = 0.4f / 24f;
+        day = 2.3f / 24f;
     }
 
     void Update()
     {
-        day += Time.deltaTime / 1440;
+        day += Time.deltaTime / 720;
         float dayNormalized = day % 1f;
 
         float rotationDegreesPerDay = 360f;
