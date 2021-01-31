@@ -29,6 +29,7 @@ public class ButtonControls : MonoBehaviour
         canvas.enabled = true;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void CloseCanvas(Canvas canvas)
@@ -36,6 +37,8 @@ public class ButtonControls : MonoBehaviour
         canvas.enabled = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
 
     }
     
