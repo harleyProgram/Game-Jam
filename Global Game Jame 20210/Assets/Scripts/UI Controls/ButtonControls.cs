@@ -19,9 +19,24 @@ public class ButtonControls : MonoBehaviour
     }
 
 
-    private void ChangeScene(string sceneName)
+    public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void OpenCanvas(Canvas canvas)
+    {
+        canvas.enabled = true;
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void CloseCanvas(Canvas canvas)
+    {
+        canvas.enabled = false;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
     
     

@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class GameHandler : MonoBehaviour
@@ -21,8 +23,15 @@ public class GameHandler : MonoBehaviour
     public float currentTimeLeft = 0.0f;
     private float maxTime = 90.0f;
 
+    [Space]
+    private ButtonControls _buttonControls;
+    [SerializeField] private Canvas missionControlsCanvas;
+    [SerializeField] private Button closeMissionButton, quitButton;
+    [SerializeField] private TMP_Text missionText;
+
     private void Awake()
     {
+        _buttonControls = FindObjectOfType<ButtonControls>();
         _generateRooms = FindObjectOfType<GenerateRooms>();
         
     }
@@ -30,11 +39,15 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         SpawnLostItem();
-        Time.timeScale = 1.0f;
+        SetMissionControlsUI();
     }
 
     private void Update()
     {
+        
+        if(Input.GetKeyDown(KeyCode.Escape))
+            _buttonControls.OpenCanvas(missionControlsCanvas);
+        
         currentTimeLeft += Time.deltaTime;
 
         if (currentTimeLeft < maxTime) return;
@@ -67,10 +80,30 @@ public class GameHandler : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0.0f;
+        Cursor.lockState = CursorLockMode.None;
         gameOverCanvas.enabled = true;
         endText.text = "You had to leave without your " + lostItem.name;
 
     }
+
+    private void SetMissionControlsUI()
+    {
+        closeMissionButton.onClick.AddListener(delegate { _buttonControls.CloseCanvas(missionControlsCanvas);});
+        quitButton.onClick.AddListener(delegate { _buttonControls.ChangeScene("Main Menu");});
+        MissionStatement();
+    }
+
+    private void MissionStatement()
+    {
+        _buttonControls.OpenCanvas(missionControlsCanvas);
+
+        missionText.text = "SH*T... Where did I put my " + lostItem.name + " I swear it was..... \n"  +
+                           " Find the missing item before time runs out.";
+        
+        
+    }
+    
+    
     
     
 }

@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class PlayerInteractionController : MonoBehaviour
 {
-    private event Action _playerInterActionEvent;
 
     private InteractableObject _interactableObject = null;
     private Color originalColour;
@@ -19,26 +18,30 @@ public class PlayerInteractionController : MonoBehaviour
     private void Update()
     {
         
-        if (Input.GetMouseButtonDown(1) && holdingItem != null)
+        if (Input.GetMouseButtonDown(1) && holdingItem != null) // Drop item holding in the hand.
         {
             holdingItem.GetComponent<PickUp_Interaction>().DropItem();
         }
+        
         RaycastHit hit;
 
-        Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.forward), Color.red,1f);
+        //Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.forward), Color.red,1f);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 8f))
         {
-            if (lastHit != null && lastHit != hit.transform)
+            if (lastHit != null)
             {
-                lastHit.GetComponent<Renderer>().material.color = originalColour;
-                _interactableObject = null;
-                lastHit = null;
+                if (lastHit.GetComponent<InteractableObject>() != null)
+                {
+                    lastHit.GetComponent<Renderer>().material.color = originalColour;
+                    _interactableObject = null;
+                    lastHit = null;
+                }
             }
-            
+
             if (hit.transform.GetComponent<InteractableObject>() == null) return;
             
             Renderer renderer = hit.transform.GetComponent<Renderer>();
-            if (renderer.material.color != Color.yellow)
+            if (renderer.material.color != Color.yellow || renderer.material.color != Color.green)
             {
                 originalColour = renderer.material.color;
                 if(hit.transform.GetComponent<LostItem_Interaction>() != null)
@@ -58,7 +61,6 @@ public class PlayerInteractionController : MonoBehaviour
                 _interactableObject?.Interact();
             }
         }
-
         
         
         
