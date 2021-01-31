@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: df9101cc8f2f0484c9b9152d9c91dfea,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5016,10 +5016,10 @@ MonoBehaviour:
   closeMissionButton: {fileID: 712471670}
   quitButton: {fileID: 799234346}
   missionText: {fileID: 14220461}
-  winCanvas: {fileID: 0}
-  winText: {fileID: 0}
-  winLeaveButton: {fileID: 0}
-  winReplayButton: {fileID: 0}
+  winCanvas: {fileID: 505958643}
+  winText: {fileID: 72425300}
+  winLeaveButton: {fileID: 832564008}
+  winReplayButton: {fileID: 1648101044}
 --- !u!82 &1239326869
 AudioSource:
   m_ObjectHideFlags: 0
