@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    public Button playButton, controlsButtonEnter, controlsButtonExit, quitButton;
+    public Button playButton, controlsButtonEnter, controlsButtonExit, quitButton, creditButton, closeCreditButton;
     public Canvas controlCanvas;
+    public Canvas creditCanvas;
 
     [Space] [Header("Controls Canvas")] 
     public Button firstNextButton;
@@ -17,6 +18,7 @@ public class MainMenuButtons : MonoBehaviour
     [Space] 
     public GameObject firstPanel;
     public GameObject secondPanel, thirdPanel;
+    
     
     private void Awake()
     {
@@ -28,6 +30,9 @@ public class MainMenuButtons : MonoBehaviour
         secondNextButton.onClick.AddListener(delegate { ChangeToNextSection(thirdPanel, secondPanel ); });
         firstBackButton.onClick.AddListener(delegate { ChangeToNextSection(firstPanel, secondPanel ); });
         secondBackButton.onClick.AddListener(delegate { ChangeToNextSection(secondPanel, thirdPanel ); });
+
+        creditButton.onClick.AddListener(delegate { OpenCanvas(creditCanvas); });
+        closeCreditButton.onClick.AddListener(delegate { CloseCanvas(creditCanvas); });
     }
 
     private void ChangeScene()
@@ -50,6 +55,18 @@ public class MainMenuButtons : MonoBehaviour
     {
         close.SetActive(false);
         next.SetActive(true);
+    }
+
+    private void CloseCanvas(Canvas canvas)
+    {
+        canvas.enabled = false;
+        Time.timeScale = 1;
+    }
+    private void OpenCanvas(Canvas canvas)
+    {
+        canvas.enabled = true;
+        Time.timeScale = 0;
+
     }
 
 

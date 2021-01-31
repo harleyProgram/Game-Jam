@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (move.x != 0 || move.z != 0)
         {
-            Debug.Log("Play foot steps");
+           // Debug.Log("Play foot steps");
         }
 
     }
